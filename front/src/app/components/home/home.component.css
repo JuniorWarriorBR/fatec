@@ -1,0 +1,9 @@
+.modal.show {
+  display: block;
+}
+.alinhamento-bottom {
+  position: absolute;
+  left: 10%;
+  bottom: 10px;
+  width: 80%;
+}

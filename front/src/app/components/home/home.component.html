@@ -1,0 +1,86 @@
+<div class="form-group">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Buscar"
+    [(ngModel)]="nome"
+    (input)="buscar()"
+  />
+</div>
+
+<div class="card-deck">
+  <div class="card pb-3" *ngFor="let empresa of empresas">
+    <div class="card-body">
+      <h5 class="card-title">{{ empresa.nome }}</h5>
+      <p class="card-text">
+        {{ empresa.descricao }}
+      </p>
+      <button
+        type="button"
+        class="btn btn-outline-info btn-sm alinhamento-bottom"
+        (click)="showModal = true"
+        (click)="setId(empresa.id)"
+        data-toggle="modal"
+        data-target="#myModal"
+      >
+        Agendar
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  id="myModal"
+  class="modal fade"
+  role="dialog"
+  [ngClass]="{ show: showModal }"
+>
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Marcar Reserva</h4>
+      </div>
+      <form
+        id="add-form"
+        (ngSubmit)="f.form.valid && saveReserva(f)"
+        #f="ngForm"
+        novalidate
+      >
+        <div class="modal-body">
+          <input
+            [(ngModel)]="reserva.dataHoraReserva"
+            type="datetime-local"
+            id="dataHoraReserva"
+            name="dataHoraReserva"
+            #dataHoraReserva="ngModel"
+            required
+            [ngClass]="{ 'is-invalid': f.submitted && dataHoraReserva.invalid }"
+          />
+        </div>
+        <div
+          *ngIf="f.submitted && dataHoraReserva.invalid"
+          class="invalid-feedback"
+        >
+          <div *ngIf="dataHoraReserva.errors.required">
+            Horário é obrigatório
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-default"
+            data-dismiss="modal"
+            (click)="showModal = false"
+          >
+            Fechar
+          </button>
+          <button type="submit" class="btn btn-info" data-dismiss="modal">
+            Salvar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

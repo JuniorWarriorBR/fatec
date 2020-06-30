@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="col-md-6 mx-auto">
+    <div class="card rounded-0">
+      <div class="card-header">
+        <h3>Registrar</h3>
+      </div>
+      <div class="card-body">
+        <form
+          class="form"
+          id="add-form"
+          (ngSubmit)="f.form.valid && saveUsuario(f)"
+          #f="ngForm"
+          novalidate
+        >
+          <div class="form-group">
+            <label for="nome">Nome</label>
+            <input
+              type="text"
+              [(ngModel)]="usuario.nome"
+              id="nome"
+              name="nome"
+              #nome="ngModel"
+              required
+              class="form-control rounded-0"
+              [ngClass]="{ 'is-invalid': f.submitted && nome.invalid }"
+              placeholder="Seu Nome"
+            />
+            <div *ngIf="f.submitted && nome.invalid" class="invalid-feedback">
+              <div *ngIf="nome.errors.required">O campo nome é obrigatório</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              [(ngModel)]="usuario.email"
+              id="email"
+              name="email"
+              #email="ngModel"
+              required
+              class="form-control rounded-0"
+              [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
+              placeholder="Seu E-mail"
+            />
+            <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+              <div *ngIf="email.errors.required">
+                O campo email é obrigatório
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="senha">Senha</label>
+            <input
+              type="password"
+              [(ngModel)]="usuario.senha"
+              id="senha"
+              name="senha"
+              #senha="ngModel"
+              required
+              class="form-control rounded-0"
+              [ngClass]="{ 'is-invalid': f.submitted && senha.invalid }"
+              placeholder="Sua Senha"
+            />
+            <div *ngIf="f.submitted && senha.invalid" class="invalid-feedback">
+              <div *ngIf="senha.errors.required">
+                O campo senha é obrigatório
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary float-right">
+            Registrar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
